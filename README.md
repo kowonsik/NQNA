@@ -1,1 +1,1 @@
-# NQNA
+# News Quatation Network Analysis
