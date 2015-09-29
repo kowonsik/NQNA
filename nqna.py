@@ -124,12 +124,6 @@ def write_excel_result(q_id, q_label, q_exemplar, G_q, excel_path, sheet_count):
 		for i, j in q_label.iteritems():
 			if q_label[k]==q_label[i]:
 				third.cell(row=k+2, column=i+2).value = 0 
-	
-	#def one_depth_connect(ii,jj):
-	#	for kk, vv in q_id.iteritems():
-	#		for i_k, j_v in q_label.iteritems():
-	#			if q_label[kk]==ii and q_label[i_k]==jj:
-	#				third.cell(row=kk+2, column=i_k+2).value = 1 
 
 	# 1 depth connection
 	for i in range(0, G_q.shape[0]):
@@ -140,6 +134,8 @@ def write_excel_result(q_id, q_label, q_exemplar, G_q, excel_path, sheet_count):
 						for i_k, j_v in q_label.iteritems():
 							if q_label[kk]==i and q_label[i_k]==j:
 								third.cell(row=kk+2, column=i_k+2).value = 1 
+	# forth sheet
+	# 2 depth connection
 
 					
 	wb.save(excel_path)
