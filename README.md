@@ -15,7 +15,7 @@
       - sheet 1 : matrix 정보 저장
       - sheet 2 : 연결 Depth가 0(같은 클러스터), 연결 Depth가 <=1
 
-- ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/connection.png)
+- ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/connection_path.png)
 - ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/id.png)
 - ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/matrix.png)
 - ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/d1.png)
