@@ -1,8 +1,7 @@
 # News Quatation Network Analysis
 
 # 업데이트 해야할 리스트
-   - 노드 클릭 & 클릭시 상세 그래프
-   - 그래프의 노드 배치 변경
+   - Graph label
    - 엑셀 쉬트3,4
     - 3: 연결 Depth가 <=2
     - 4: 연결 Depth가 <=3
