@@ -9,7 +9,7 @@ from openpyxl import load_workbook
 
 
 q_id={0:23, 1:10, 2:39, 3:44, 4:14, 5:33, 6:21, 7:66, 8:88, 9:11}
-q_label={0:1, 1:4, 2:0, 3:2, 4:3, 5:4, 6:1, 7:2, 8:2, 9:1}
+q_label={0:0, 1:4, 2:1, 3:2, 4:3, 5:4, 6:1, 7:2, 8:2, 9:1}
 q_exemplar={0:23, 1:39, 2:44, 3:14, 4:33}
 
 G_q = np.matrix([\
@@ -38,9 +38,11 @@ def draw_graph(graph):
 		G.add_edge(edge[0], edge[1])
 
 	# draw graph
-		pos = nx.shell_layout(G)
-		nx.draw(G, pos)
-		nx.draw_networkx_labels(G, pos, labels)
+	#pos = nx.shell_layout(G)
+	pos = nx.spring_layout(G)
+	#pos = nx.random_layout(G)
+	nx.draw(G, pos)
+	nx.draw_networkx_labels(G, pos, labels)
 
 	# save as png
 	plt.savefig("./png/connection_path.png") 
@@ -65,7 +67,9 @@ def create_connect(q_id, q_exemplar, G_q):
 		v_size = len(inv_label[k])
 
 		for h in range(0, v_size):
-			graph.append((q_exemplar[k],q_id[inv_label[k][h]]))
+			if str(q_exemplar[k]) not in str(q_id[inv_label[k][h]]):
+				#print str(q_exemplar[k]), str(q_id[inv_label[k][h]])
+				graph.append((q_exemplar[k],q_id[inv_label[k][h]]))
 
 	draw_graph(graph)
 
@@ -130,6 +134,7 @@ def write_excel_result(q_id, q_label, q_exemplar, G_q, excel_path, sheet_count):
 		for j in range(0, G_q.shape[1]):
 			if str(i) not in str(j):
 				if (G_q[i, j])==1:
+					#print i, j
 					for kk, vv in q_id.iteritems():
 						for i_k, j_v in q_label.iteritems():
 							if q_label[kk]==i and q_label[i_k]==j:
@@ -159,6 +164,4 @@ if __name__ == "__main__":
 	
 	# make graph
 	create_connect(q_id, q_exemplar, G_q)
-
-
 
