@@ -7,31 +7,66 @@ import numpy as np
 from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
 
+from na_config import * 
+import na_tools as nt
+import na_build
 
-q_id={0:23, 1:10, 2:39, 3:44, 4:14, 5:33, 6:21, 7:66, 8:88, 9:11}
-q_label={0:0, 1:4, 2:1, 3:2, 4:3, 5:4, 6:1, 7:2, 8:2, 9:1}
-q_exemplar={0:23, 1:39, 2:44, 3:14, 4:33}
-
-G_q = np.matrix([\
-	[1, 0, 1, 0, 0],\
-	[0, 1, 1, 0, 1],\
-	[1, 1, 1, 1, 0],\
-	[0, 0, 1, 1, 0],\
-	[0, 1, 0, 0, 1]])
+# parameter
+graph = []
+inv_label = {}
 
 labels={}
+ 
+NewsQuoObjs=nt.loadObjectBinaryFast(NEWS_QUO_OBJ)
 
-def draw_graph(graph):
+#for (qid, obj_) in NewsQuoObjs:
+#	for key in obj_.__dict__.items():
+#		if key[0]=='quotation':
+#			print key[1][0:10]
+
+#try:
+#	print 'loading ' +NEWS_QUO_OBJ
+#	NewsQuoObjs=nt.loadObjectBinaryFast(NEWS_QUO_OBJ)
+#except:
+#	status_out=build_NewsQuoObjs()
+#	print status_out
+#	if status_out!=True:
+#		print status_outNEWS_SRC_OBJ
+#	print 'job done, and stored news quotation objects...'
+#	NewsQuoObjs=nt.loadObjectBinaryFast(NEWS_QUO_OBJ)
+
+#if argv_print==True:
+#	print '********************************************************************'
+#	print 'Print News Quotation Objects- NewsQuoObjs '
+#	for (qid, obj_) in NewsQuoObjs:
+#		print '==================================================='
+#		print 'Quotation ID : ', qid
+#		print '==================================================='
+#		obj_.whoami()
+#	print '********************************************************************'
+
+def draw_graph(graph, q_exemplar):
 	# extract nodes from graph
 	nodes = set([n1 for n1, n2 in graph] + [n2 for n1, n2 in graph])
 
 	# create networkx graph
 	G=nx.Graph()
 
+
+	for (qid, obj_) in NewsQuoObjs:
+		# add nodes
+		for node in nodes:
+			if qid==node:
+				for key in obj_.__dict__.items():
+					if key[0]=='quotation':
+						#print key[1][0:10]
+						labels[node]=str(node) +'\n'+ key[1][0:10]
+				G.add_node(node)
+					
 	# add nodes
-	for node in nodes:
-		labels[node]=node
-		G.add_node(node)
+	#for node in nodes:
+	#	labels[node]=node
+	#	G.add_node(node)
 
 	# add edges
 	for edge in graph:
@@ -41,13 +76,21 @@ def draw_graph(graph):
 	#pos = nx.shell_layout(G)
 	pos = nx.spring_layout(G)
 	#pos = nx.random_layout(G)
-	nx.draw(G, pos)
+	
+	q_exemplar_node = [] 
+
+	for k, v in q_exemplar.iteritems():
+		q_exemplar_node.append(v)
+
+	nx.draw(G, pos, node_size=200, font_size=5, node_color='r', nodelist=nodes)
+	nx.draw(G, pos, node_size=300, font_size=5, node_color='r', nodelist=q_exemplar_node)
 	nx.draw_networkx_labels(G, pos, labels)
 
 	# save as png
-	plt.savefig("./png/connection_path.png") 
+	plt.savefig(SAVE_CONNECTION) 
 
 	# show graph
+	#plt.text(0,0,s='some text', bbox=dict(facecolor='red', alpha=0.5),horizontalalignment='center')
 	plt.show()
 
 # same label finding
@@ -71,13 +114,13 @@ def create_connect(q_id, q_exemplar, G_q):
 				#print str(q_exemplar[k]), str(q_id[inv_label[k][h]])
 				graph.append((q_exemplar[k],q_id[inv_label[k][h]]))
 
-	draw_graph(graph)
+	draw_graph(graph, q_exemplar)
 
-def write_excel_result(q_id, q_label, q_exemplar, G_q, excel_path, sheet_count):
+def write_excel_result(q_id, q_label, q_exemplar, G_q, RESULT_EXCEL, SHEET_COUNT):
 	print " creating excel result....."
 	wb=Workbook()
 
-	for i in range(1,sheet_count):
+	for i in range(1,SHEET_COUNT):
 		ws = wb.create_sheet()
 	
 	sheetList = wb.get_sheet_names()
@@ -143,25 +186,7 @@ def write_excel_result(q_id, q_label, q_exemplar, G_q, excel_path, sheet_count):
 	# 2 depth connection
 
 					
-	wb.save(excel_path)
+	wb.save(RESULT_EXCEL)
 	print " save excel result "
 	
-
-# parameter
-graph = []
-inv_label = {}
-excel_path = './result.xlsx'
-sheet_count = 4
-
-if __name__ == "__main__":
-	print " running news quatation network analysis....."
-
-	# for fiding same label
-	find_same_label(q_label)
-
-	# excel id, label, exemplar, G_q(matrix) result
-	write_excel_result(q_id, q_label, q_exemplar, G_q, excel_path, sheet_count)
-	
-	# make graph
-	create_connect(q_id, q_exemplar, G_q)
 
