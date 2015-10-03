@@ -11,41 +11,24 @@ from na_config import *
 import na_tools as nt
 import na_build
 
+
+import matplotlib
+
+matplotlib.rc('font', family='HYsanB')  # 한글 폰트 설정
+
 # parameter
 graph = []
 inv_label = {}
 
 labels={}
+
+path_degree = {}
+path_all = []
  
 NewsQuoObjs=nt.loadObjectBinaryFast(NEWS_QUO_OBJ)
 
-#for (qid, obj_) in NewsQuoObjs:
-#	for key in obj_.__dict__.items():
-#		if key[0]=='quotation':
-#			print key[1][0:10]
 
-#try:
-#	print 'loading ' +NEWS_QUO_OBJ
-#	NewsQuoObjs=nt.loadObjectBinaryFast(NEWS_QUO_OBJ)
-#except:
-#	status_out=build_NewsQuoObjs()
-#	print status_out
-#	if status_out!=True:
-#		print status_outNEWS_SRC_OBJ
-#	print 'job done, and stored news quotation objects...'
-#	NewsQuoObjs=nt.loadObjectBinaryFast(NEWS_QUO_OBJ)
-
-#if argv_print==True:
-#	print '********************************************************************'
-#	print 'Print News Quotation Objects- NewsQuoObjs '
-#	for (qid, obj_) in NewsQuoObjs:
-#		print '==================================================='
-#		print 'Quotation ID : ', qid
-#		print '==================================================='
-#		obj_.whoami()
-#	print '********************************************************************'
-
-def draw_graph(graph, q_exemplar):
+def draw_graph(graph, q_id, q_exemplar):
 	# extract nodes from graph
 	nodes = set([n1 for n1, n2 in graph] + [n2 for n1, n2 in graph])
 
@@ -77,13 +60,10 @@ def draw_graph(graph, q_exemplar):
 	pos = nx.spring_layout(G)
 	#pos = nx.random_layout(G)
 	
-	q_exemplar_node = [] 
+	degree = nx.degree(G)
 
-	for k, v in q_exemplar.iteritems():
-		q_exemplar_node.append(v)
-
-	nx.draw(G, pos, node_size=200, font_size=5, node_color='r', nodelist=nodes)
-	nx.draw(G, pos, node_size=300, font_size=5, node_color='r', nodelist=q_exemplar_node)
+	nx.draw(G, pos, node_size=[v*100 for v in degree.values()], font_size=5, node_color='r')
+	#nx.draw(G, pos, node_size=300, font_size=5, node_color='r', nodelist=q_exemplar_node)
 	nx.draw_networkx_labels(G, pos, labels)
 
 	# save as png
@@ -91,6 +71,18 @@ def draw_graph(graph, q_exemplar):
 
 	# show graph
 	#plt.text(0,0,s='some text', bbox=dict(facecolor='red', alpha=0.5),horizontalalignment='center')
+
+	for k_s, v_s in q_id.iteritems():
+		path_all=[]
+		for k_t, v_t in q_id.iteritems():
+			if k_s == k_t:
+				path_all.append('0')
+			else:
+				for path in nx.all_simple_paths(G, source=v_s, target=v_t):
+					len_path = len(path)-1
+					#print k_s, v_s, k_t, v_t, len_path
+					path_all.append(str(len_path))
+		path_degree[str(k_s)] = path_all
 	plt.show()
 
 # same label finding
@@ -114,7 +106,7 @@ def create_connect(q_id, q_exemplar, G_q):
 				#print str(q_exemplar[k]), str(q_id[inv_label[k][h]])
 				graph.append((q_exemplar[k],q_id[inv_label[k][h]]))
 
-	draw_graph(graph, q_exemplar)
+	draw_graph(graph, q_id, q_exemplar)
 
 def write_excel_result(q_id, q_label, q_exemplar, G_q, RESULT_EXCEL, SHEET_COUNT):
 	print " creating excel result....."
@@ -185,6 +177,30 @@ def write_excel_result(q_id, q_label, q_exemplar, G_q, RESULT_EXCEL, SHEET_COUNT
 	# forth sheet
 	# 2 depth connection
 
+	forth = wb.get_sheet_by_name(sheetList[3])
+
+	for k, v in q_id.iteritems():
+		forth.cell(row=k+2, column=1).value = v #  
+		forth.cell(row=1, column=k+2).value = v # 
+
+	for k_p, v_p in path_degree.iteritems():
+		for vv in range(0, len(v_p)):
+			if v_p[vv]=='2':
+				forth.cell(row=int(k_p)+2, column=int(vv)+2).value = 2
+
+	# fifth sheet
+	# 3 depth connection
+
+	fifth = wb.get_sheet_by_name(sheetList[4])
+
+	for k, v in q_id.iteritems():
+		fifth.cell(row=k+2, column=1).value = v #  
+		fifth.cell(row=1, column=k+2).value = v # 
+
+	for k_p, v_p in path_degree.iteritems():
+		for vv in range(0, len(v_p)):
+			if v_p[vv]=='3':
+				fifth.cell(row=int(k_p)+2, column=int(vv)+2).value = 3
 					
 	wb.save(RESULT_EXCEL)
 	print " save excel result "
