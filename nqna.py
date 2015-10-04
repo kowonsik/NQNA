@@ -16,8 +16,10 @@ import matplotlib
 
 NewsQuoObjs=nt.loadObjectBinaryFast(NEWS_QUO_OBJ)
 
-
+# graph is a list of edged in graph.  
+#e.g. (23, 44), (39, 44), (39, 33), (44, 23), (44, 39), (44, 14), (14, 44), (33, 39), (39, 21), (39, 11), (44, 66), (44, 88), (33, 10)]
 graph = []
+
 inv_label = {}
 labels={}
 path_degree = {}
@@ -25,8 +27,10 @@ path_all = []
 
 def draw_graph(graph, q_id, q_exemplar, graph_opt, argv_print):
     # extract nodes from graph
-    nodes = set([n1 for n1, n2 in graph] + [n2 for n1, n2 in graph])
-
+    #nodes = set([n1 for n1, n2 in graph] + [n2 for n1, n2 in graph])
+    # Get list of nodes in edges
+    nodes =list(set(zip(*graph)[0]+zip(*graph)[1]))
+    import pdb;pdb.set_trace()
     # create networkx graph
     G=nx.Graph()
 
@@ -97,12 +101,11 @@ def find_same_label(q_label, argv_print):
         print inv_label
         print "========================"
 
-def create_connect(q_id, q_exemplar, G_q, graph_opt='all', argv_print= False):
+def create_connect(q_id, q_exemplar, G_q, graph_opt='all', argv_print= True):
     # show all nodes wihtout label name
     if graph_opt == 'all':
         for i in range(0, G_q.shape[0]):
             for j in range(0, G_q.shape[1]):
-                import pdb;pdb.set_trace()
                 if i!=j:
                     if (G_q[i, j])==1:
                         graph.append((q_exemplar[i],q_exemplar[j]))    
@@ -110,7 +113,6 @@ def create_connect(q_id, q_exemplar, G_q, graph_opt='all', argv_print= False):
             print "q_exemplar connected"
             print graph 
             print "========================"
-        
 
         for k in range(0, len(inv_label)):
             v_size = len(inv_label[k])
