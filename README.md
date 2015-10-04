@@ -1,17 +1,23 @@
 ### News Quatation Network Analysis
 
 ### 실행방법
-   - python run.py all  # fully connected graph
-   - python run.py 1    # only 1 label grop noded connected graph
+```sh
+python run.py all  # fully connected graph
+python run.py 1    # only 1 label grop noded connected graph
+```
 
 ### 실행결과
    - graph png
-     - /png/connected_all.png
-     - /png/connected_part_1.png  # 1 label graph
-   - excel file
-     - /exlfiles/result_connected_all.xlsx
-     - /exlfiles/result_connected_part_1.xlsx  # 1 label
+```sh
+~/png/connected_all.png
+~/png/connected_part_1.png  # 1 label graph
+```
 
+   - excel file
+```sh
+~/exlfiles/result_connected_all.xlsx
+~/exlfiles/result_connected_part_1.xlsx  # 1 label
+```
 ### 완료
    - Graph
       - fully connected
