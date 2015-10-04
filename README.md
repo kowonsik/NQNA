@@ -6,11 +6,11 @@
 
 ### 실행결과
    - graph png
-     - /png/all_connected_path.png
-     - /png/connected_path.png
+     - /png/connected_all.png
+     - /png/connected_part_1.png  # 1 label graph
    - excel file
-     - /exlfiles/result_all_connected.xlsx
-     - /exlfiles/result_part_connected.xlsx
+     - /exlfiles/result_connected_all.xlsx
+     - /exlfiles/result_connected_part_1.xlsx  # 1 label
 
 ### 완료
    - Graph
