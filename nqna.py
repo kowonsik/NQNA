@@ -16,7 +16,6 @@ import matplotlib
 
 NewsQuoObjs=nt.loadObjectBinaryFast(NEWS_QUO_OBJ)
 
-matplotlib.rc('font', family='HYsanB')  # 한글 폰트 설정
 
 graph = []
 inv_label = {}
@@ -53,6 +52,9 @@ def draw_graph(graph, q_id, q_exemplar, graph_opt, argv_print):
 
 	nx.draw(G, pos, node_size=[v*100 for v in degree.values()], font_size=5, node_color='r')
 	#nx.draw(G, pos, node_size=300, font_size=5, node_color='r', nodelist=q_exemplar_node)
+
+	matplotlib.rc('font', family='AppleGothic')  # 폰트 설정
+	
 	if graph_opt == 'all':
 		plt.savefig(SAVE_ALL_CONNECTION) # save as png 
 	else :
@@ -169,11 +171,11 @@ def make_sheet1(wb,first,q_id,q_label,q_exemplar, RESULT_EXCEL, graph_opt, argv_
 def make_sheet2(wb, second, G_q, RESULT_EXCEL, graph_opt, argv_print):
 	# second sheet
 	# matrix input
-	for i in range(1, G_q.shape[0]+1): 
-		second.cell(row=1, column=i+1).value = i 
+	for i in range(0, G_q.shape[0]): 
+		second.cell(row=1, column=i+2).value = i 
 
-	for j in range(1, G_q.shape[0]+1): 
-		second.cell(row=j+1, column=1).value = j 
+	for j in range(0, G_q.shape[0]): 
+		second.cell(row=j+2, column=1).value = j 
 
 	for m in range(0, G_q.shape[0]):
 		for n in range(0, G_q.shape[1]):
