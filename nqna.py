@@ -30,7 +30,6 @@ def draw_graph(graph, q_id, q_exemplar, graph_opt, argv_print):
     #nodes = set([n1 for n1, n2 in graph] + [n2 for n1, n2 in graph])
     # Get list of nodes in edges
     nodes =list(set(zip(*graph)[0]+zip(*graph)[1]))
-    import pdb;pdb.set_trace()
     # create networkx graph
     G=nx.Graph()
 
@@ -38,10 +37,7 @@ def draw_graph(graph, q_id, q_exemplar, graph_opt, argv_print):
         # add nodes
         for node in nodes:
             if qid==node:
-                for key in obj_.__dict__.items():
-                    if key[0]=='quotation':
-                        #print key[1][0:10]
-                        labels[node]=str(node) +'\n'+ key[1][0:20]
+                labels[node]=str(node) +'\n'+ obj_.quotation[0:20]
                 G.add_node(node)   # add nodes
     # add edges
     for edge in graph:
