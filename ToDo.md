@@ -6,6 +6,14 @@
 
 #### 구현 List
 
+    - 인용문의 연결 그래프
+    - 인용문의 연결 정보를 엑셀에 저장
+       - Sheet 1 : qid, q_label, q_exemplar
+       - Sheet 2 : Label 연결 Matrix
+       - Sheet 3 : Label 연결 Depth <= 1 인경우(Depth가 0 or 1인 경우가 있으면 1, 없으면 0을 넣으면 됨)
+       - Sheet 4 : Label 연결 Depth <= 2 인경우(Depth가 0 or 1 or 2인 경우가 있으면 1, 없으면 0을 넣으면 됨)
+       - Sheet 5 : Label 연결 Depth <= 3 인경우(Depth가 0 or 1 or 2 or 3인 경우가 있으면 1, 없으면 0을 넣으면 됨)
+
 #### 제공 Raw Data
    - 정박사님께서 제공해주실 Raw Data 입니다
 ````sh
