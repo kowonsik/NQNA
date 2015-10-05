@@ -44,11 +44,13 @@ G_q = np.matrix([\
 #### 참고
    - 정박사님 NLP Git
     - https://github.com/deokwooj/NLP
+    
     - 정보원의 정보를 Dictionary로 변환
        - https://github.com/deokwooj/NLP/blob/master/binfiles/NewsSrcObjs.p
     - 인용문의 정보를 Dictionary로 변환
        - https://github.com/deokwooj/NLP/blob/master/binfiles/NewsQuoObjs.p
-    - 연관도 메트릭스 정보
+       
+    - q_id, q_label, q_exemplar, G_p(메트릭스)
     
    - 정박사님 작성중인 논문
     - https://github.com/kowonsik/NQNA/blob/master/doc/icsc_nna.pdf
