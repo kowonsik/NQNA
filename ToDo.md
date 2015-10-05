@@ -48,7 +48,7 @@ G_q = np.matrix([\
     
 ````
 
-#### 참고
+#### 자료
    - 정박사님 NLP Git
     - https://github.com/deokwooj/NLP
     
@@ -58,6 +58,7 @@ G_q = np.matrix([\
        - https://github.com/deokwooj/NLP/blob/master/binfiles/NewsQuoObjs.p
        
     - q_id, q_label, q_exemplar, G_p(메트릭스)
-    
+
+#### 참고    
    - 정박사님 작성중인 논문
     - https://github.com/kowonsik/NQNA/blob/master/doc/icsc_nna.pdf
