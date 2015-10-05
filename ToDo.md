@@ -8,6 +8,14 @@
 
     - 인용문의 연결 그래프
     - 인용문의 연결 정보를 엑셀에 저장
+       - 같은 Label(클러스터)의 id(node)의 depth는 0
+       - 연결된 클러스터의 Depth는 1이며 클러스터 간에는 다수의 Path가 있어 모든 경우의 수를 다 고려하여 처리
+       - 아래 그림을 보면 
+       - Label 1에서 Label 2로 가는 Depth가 직접가는 1 이있고
+       - Label 1에서 Label 4를 거쳐 Label 2로 가는 Depth가 2인경우가 있음
+
+![cluster](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/cluster.png)
+
        - Sheet 1 : qid, q_label, q_exemplar
        - Sheet 2 : Label 연결 Matrix
        - Sheet 3 : Label 연결 Depth <= 1 인경우(Depth가 0 or 1인 경우가 있으면 1, 없으면 0을 넣으면 됨)
