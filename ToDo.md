@@ -13,6 +13,10 @@
        - Sheet 3 : Label 연결 Depth <= 1 인경우(Depth가 0 or 1인 경우가 있으면 1, 없으면 0을 넣으면 됨)
        - Sheet 4 : Label 연결 Depth <= 2 인경우(Depth가 0 or 1 or 2인 경우가 있으면 1, 없으면 0을 넣으면 됨)
        - Sheet 5 : Label 연결 Depth <= 3 인경우(Depth가 0 or 1 or 2 or 3인 경우가 있으면 1, 없으면 0을 넣으면 됨)
+       
+
+   - 참고 그래프입니다(참고만;;)
+![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/connection_path.png)
 
 #### 제공 Raw Data
    - 정박사님께서 제공해주실 Raw Data 입니다
@@ -43,11 +47,6 @@ G_q = np.matrix([\
     [0, 1, 0, 0, 1]])
     
 ````
-
-#### To Do List
-
-   - 참고 그래프입니다(참고만;;)
-![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/connection_path.png)
 
 #### 참고
    - 정박사님 NLP Git
