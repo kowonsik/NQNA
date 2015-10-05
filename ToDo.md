@@ -6,8 +6,24 @@
 
 #### 구현 List
 
-    - 인용문의 연결 그래프
-    - 인용문의 연결 정보를 엑셀에 저장
+    1. 인용문의 연결 그래프
+       - 실행시 옵션을 주어 그래프의 상태 정보를 볼수 있도록 구현
+
+````sh
+       - 옵션 예
+         - python -show q_id  # id만 표시
+         - python -show all   # 모두 표시
+         - python -show exemplar   # exemplar만 표시
+         # 모든 노드에 대한 Degree of Neighbor의 랭킹을 매기고 가장 많은 2개의 exemplar를 표시
+         - python -show maxngb 2   
+         - python -show label 1   # 1번 Label 만 표시
+````
+
+       - 같은 Label은 exemplar 중심으로 연결됨
+       - 다른 Label에 연결될때는 exemplar 를 통해서 연결됨
+       - node의 정보는 q_id와 인용문의 일부(10자정도)를 표시해주면 됨
+       
+    2. 인용문의 연결 정보를 엑셀에 저장
        - 같은 Label(클러스터)의 id(node)의 depth는 0
        - 연결된 클러스터의 Depth는 1이며 클러스터 간에는 다수의 Path가 있어 모든 경우의 수를 다 고려하여 처리
        - 아래 그림을 보면 
