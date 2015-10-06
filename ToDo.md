@@ -17,6 +17,7 @@
    - 빈번한 연결의 개념을 수치화 할 수 있도록 모델을 설계
    - 모델은 각 데이터가 뉴스기사에 포함되는 빈도수를 기준으로 연산하도록 정의하였으며, 포함 빈도에 따라 연관성 행렬을 구성하고, 이 행렬들의 원소 간에 거리(길이)를 연산하여 각 데이터 사이의 연관성 지표를 수치로 계산
 
+![association](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/s-q-a_association.png)
 
 #### 구현 List(To Do List)
 
