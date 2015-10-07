@@ -56,6 +56,9 @@
 
    - 참고 그래프입니다(참고만;;)
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/connection_path.png)
+![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/id.png)
+![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/matrix.png)
+![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/d1.png)
 
 #### 제공 Raw Data
    - 정박사님께서 제공해주실 Raw Data 입니다
