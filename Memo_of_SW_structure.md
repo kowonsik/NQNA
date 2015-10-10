@@ -20,7 +20,7 @@
 ![association](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/s-q-a_association.png)
 
 #### 소프트웨어 입력 파일 및 연관도 도출 데이터 형식
-![association](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/xls_with_arrow.png)
+![association](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/xls_files_with_arrow.png)
 
 #### 구현 List(To Do List)
 
