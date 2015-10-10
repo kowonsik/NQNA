@@ -22,7 +22,12 @@
 #### 소프트웨어 입력 파일 및 연관도 도출 데이터 형식
 ![association](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/xls_files_with_arrow.png)
 
-#### 구현 List(To Do List)
+#### 10/12 까지 구현 List(To Do List)
+
+(1) 위 그림의 A - Q - S 사이의 매트릭스를 구해서, 상호 의존도 행렬을 만들고 그 결과는 바이너리 파일로 저장
+    * Dr. Jung's SW output.
+(2) 바이너리 행렬을 바탕으로, 각 행렬의 element 들 간의 의존도 그래프를 그리는 것이 목표임
+
 
     1. 인용문의 연결 그래프
        - 실행시 옵션을 주어 그래프의 상태 정보를 볼수 있도록 구현
