@@ -56,6 +56,7 @@ def draw_graph(graph, q_id, q_exemplar, graph_opt, argv_print):
     matplotlib.rc('font', family='AppleGothic')  # 폰트 설정
     
     if graph_opt == 'all':
+        nx.draw_networkx_labels(G, pos, labels)
         plt.savefig(SAVE_ALL_CONNECTION) # save as png 
     else :
         nx.draw_networkx_labels(G, pos, labels)
@@ -68,20 +69,20 @@ def draw_graph(graph, q_id, q_exemplar, graph_opt, argv_print):
         for k_s, v_s in q_id.iteritems():
             path_all=[]
             for k_t, v_t in q_id.iteritems():
-                if k_s == k_t:
-                    path_all.append('0')
-                else:
-                    for path in nx.all_simple_paths(G, source=v_s, target=v_t):
-                        len_path = len(path)
-                        path_count = 0
-                        for k_e, v_e in q_exemplar.iteritems():
-                            for i in range(0, len_path):
-                                if v_e == path[i]:
-                                    path_count = path_count+1
-                        if argv_print == True:
-                            print v_s, v_t, path, q_exemplar, path_count-1 
-                        path_all.append(str(path_count-1))
-            path_degree[str(k_s)] = path_all
+                #if k_s == k_t:
+                #    path_all.append('0')
+                #else:
+                for path in nx.all_simple_paths(G, source=v_s, target=v_t):
+                    len_path = len(path)
+                    exemplar_count = 0
+                    for k_e, v_e in q_exemplar.iteritems():
+                        for i in range(0, len_path):
+                            if v_e == path[i]:
+                                exemplar_count = exemplar_count+1
+                    print v_s, v_t, path, q_exemplar, exemplar_count-1 
+                    path_all.append([v_t,exemplar_count-1])
+            path_degree[k_s] = path_all
+	    #print k_s, path_degree[k_s]
     else:
         pass
 
@@ -188,64 +189,59 @@ def make_sheet2(wb, second, G_q, RESULT_EXCEL, graph_opt, argv_print):
     save_result_excel(wb, RESULT_EXCEL, graph_opt)
 
 
+def excel_qid_insert(sheet, q_id, q_label):
+	for k, v in q_id.iteritems():
+		sheet.cell(row=k+2, column=1).value = v #  
+		sheet.cell(row=1, column=k+2).value = v # 
+
+        	# 0 depth path insert (same group)
+        	for i, j in q_label.iteritems():
+            		if q_label[k]==q_label[i]:
+                		sheet.cell(row=k+2, column=i+2).value = 1 
+			else :
+                		sheet.cell(row=k+2, column=i+2).value = 0 
+
 def make_sheet3(wb, third, q_id, q_label, G_q, RESULT_EXCEL, graph_opt, argv_print):
-    # third sheet
 
-    for k, v in q_id.iteritems():
-        third.cell(row=k+2, column=1).value = v #  
-        third.cell(row=1, column=k+2).value = v # 
-
-        # 0 depth path insert (same group)
-        for i, j in q_label.iteritems():
-            if q_label[k]==q_label[i]:
-                third.cell(row=k+2, column=i+2).value = 0 
-
-    #1 depth path insert
-    for k_p, v_p in path_degree.iteritems():
-        for vv in range(0, len(v_p)):
-            if v_p[vv]=='1':
-                third.cell(row=int(k_p)+2, column=int(vv)+2).value = 1 
-    # save result excel
-    save_result_excel(wb, RESULT_EXCEL, graph_opt)
-
-
-def make_sheet4(wb, fourth, q_id, RESULT_EXCEL, graph_opt, argv_print):
-    # fourth sheet
-    # 2 depth connection
-
-    # q_id insert
-    for k, v in q_id.iteritems():
-        fourth.cell(row=k+2, column=1).value = v #  
-        fourth.cell(row=1, column=k+2).value = v # 
-
-    # 2 depth path insert
-    for k_p, v_p in path_degree.iteritems():
-        for vv in range(0, len(v_p)):
-            if v_p[vv]=='2':
-                fourth.cell(row=int(k_p)+2, column=int(vv)+2).value = 2
+	for k, v in q_id.iteritems():
+		for i in range(0, len(path_degree[k])):
+			if path_degree[k][i][1] <= 1:
+				#print v, i, path_degree[k][i][0], path_degree[k][i][1]
+    				for m, g in q_id.iteritems():
+					cellValue_id = third.cell(row=1, column=m+2).value
+					if cellValue_id == path_degree[k][i][0]:
+              					third.cell(row=k+2, column=m+2).value = 1 
 
     # save result excel
-    save_result_excel(wb, RESULT_EXCEL, graph_opt)
+	save_result_excel(wb, RESULT_EXCEL, graph_opt)
 
+def make_sheet4(wb, fourth, q_id, q_label, G_q, RESULT_EXCEL, graph_opt, argv_print):
 
-def make_sheet5(wb, fifth, q_id, RESULT_EXCEL, graph_opt, argv_print):
-    # fifth sheet
-    # 3 depth connection
+	for k, v in q_id.iteritems():
+		for i in range(0, len(path_degree[k])):
+			if path_degree[k][i][1] <= 2:
+				#print v, i, path_degree[k][i][0], path_degree[k][i][1]
+    				for m, g in q_id.iteritems():
+					cellValue_id = fourth.cell(row=1, column=m+2).value
+					if cellValue_id == path_degree[k][i][0]:
+              					fourth.cell(row=k+2, column=m+2).value = 1 
 
-    # q_id insert
-    for k, v in q_id.iteritems():
-        fifth.cell(row=k+2, column=1).value = v #  
-        fifth.cell(row=1, column=k+2).value = v # 
-
-    # 3 depth path insert
-    for k_p, v_p in path_degree.iteritems():
-        for vv in range(0, len(v_p)):
-            if v_p[vv]=='3':
-                fifth.cell(row=int(k_p)+2, column=int(vv)+2).value = 3
-                    
     # save result excel
-    save_result_excel(wb, RESULT_EXCEL, graph_opt)
+	save_result_excel(wb, RESULT_EXCEL, graph_opt)
 
+def make_sheet5(wb, fifth, q_id, q_label, G_q, RESULT_EXCEL, graph_opt, argv_print):
+
+	for k, v in q_id.iteritems():
+		for i in range(0, len(path_degree[k])):
+			if path_degree[k][i][1] <= 3:
+				#print v, i, path_degree[k][i][0], path_degree[k][i][1]
+    				for m, g in q_id.iteritems():
+					cellValue_id = fifth.cell(row=1, column=m+2).value
+					if cellValue_id == path_degree[k][i][0]:
+              					fifth.cell(row=k+2, column=m+2).value = 1 
+
+    # save result excel
+	save_result_excel(wb, RESULT_EXCEL, graph_opt)
 
 def write_excel_result(q_id, q_label, q_exemplar, G_q, RESULT_EXCEL, SHEET_COUNT, graph_opt, argv_print):
     #print " creating excel result....."
@@ -261,11 +257,15 @@ def write_excel_result(q_id, q_label, q_exemplar, G_q, RESULT_EXCEL, SHEET_COUNT
     fourth = wb.get_sheet_by_name(sheetList[3])
     fifth = wb.get_sheet_by_name(sheetList[4])
 
+    excel_qid_insert(third, q_id, q_label)  # q_id insert and same q_id process in sheet 3 
+    excel_qid_insert(fourth, q_id, q_label)  # q_id insert and same q_id process in sheet 3 
+    excel_qid_insert(fifth, q_id, q_label)  # q_id insert and same q_id process in sheet 3 
+
     make_sheet1(wb, first, q_id, q_label, q_exemplar, RESULT_EXCEL, graph_opt, argv_print)
     make_sheet2(wb, second, G_q, RESULT_EXCEL, graph_opt, argv_print)
     make_sheet3(wb, third, q_id, q_label, G_q, RESULT_EXCEL, graph_opt, argv_print)
-    make_sheet4(wb, fourth, q_id, RESULT_EXCEL, graph_opt, argv_print)
-    make_sheet5(wb, fifth, q_id, RESULT_EXCEL, graph_opt, argv_print)
+    make_sheet4(wb, fourth, q_id, q_label, G_q, RESULT_EXCEL, graph_opt, argv_print)
+    make_sheet5(wb, fifth, q_id, q_label, G_q, RESULT_EXCEL, graph_opt, argv_print)
 
 
     
