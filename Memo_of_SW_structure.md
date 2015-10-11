@@ -78,6 +78,8 @@ A-Q-S에 대해 동시에 의존도 결정하는 것은 쉽지 않아 보임
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/id.png)
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/matrix.png)
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/d1.png)
+![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/d2.png)
+![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/d3.png)
 
 #### 연결도(네트워크)를 그리기 위한 입력 파일
    - 입력데이터는 Dr. Jung's Bin File
@@ -86,13 +88,18 @@ A-Q-S에 대해 동시에 의존도 결정하는 것은 쉽지 않아 보임
 # 10개를 예로 했지만 실제로는 3300개정도
 q_id={0:23, 1:10, 2:39, 3:44, 4:14, 5:33, 6:21, 7:66, 8:88, 9:11}
 >>>> (질문) 왜 q_id는  key : value 로 저장을 하는가? 그냥 아이디만 사용하면 될것 같은데....
+>>>> (답변) 네..
+>>>> (답변) 처음 시작을 디션어리로 해버려서;;
 
 # 인용문 Label
 # 같은 Label은 같은 클러스터를 구성한다고 보면 됨
 # q_id의 수(3300)만큼 있고 각각의 Label을 표시
 q_label={0:0, 1:4, 2:1, 3:2, 4:3, 5:4, 6:1, 7:2, 8:2, 9:1}
->>>> (질문) Label 은 어떤 기준 으로 결저 되는가? q_id 와 q_label은 key 값으로 구분 하는지?
+>>>> (질문) Label 은 어떤 기준 으로 결정 되는가? q_id 와 q_label은 key 값으로 구분 하는지?
+
 >>>> (질문) 즉 q_lable[1], q_id[1] 이면, 인용문 10번은 레이블(클러스터 Id)가 4 라는 의미인지?
+>>>> (답변) 네..
+>>>> (답변) 그리고 q_label[5]가 4이므로 g_id[5]인 33과 같은 클러스터(label)를 형성합니다(10번 & 33번)
 
 # Label의 대표 ID(클러스터 헤더)
 # q_label 수 만큼 q_exemplar 존재
