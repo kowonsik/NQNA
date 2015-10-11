@@ -105,6 +105,10 @@ q_label={0:0, 1:4, 2:1, 3:2, 4:3, 5:4, 6:1, 7:2, 8:2, 9:1}
 >>>>>>>> __q_id[5]인 33과 같은 클러스터(label)를 형성__ 의 의미는, KEY 5이기 때문에.. KEY는 그냥 KEY 이고, 인용문 id가 33 라는것 같음
 >>>>>>>> 인용문 id 와 인용문 label... 이게 어떤 관계인지 상세 설명  필요함.
 
+>>>> q_id 하고 q_label 하고 key 값이 같으므로 value 가 서로 매핑된다고 생각하시면 됩니다~
+>>>> q_id 와 q_label value 만 놓고보면.. q_id의 첫번재 value 23이 q_lable의 첫번째 value 인 0번과 매핑됩니다..
+>>>> q_id value 10번과 33번은 q_label value 4로 같으므로 같은 label
+
 # Label의 대표 ID(클러스터 헤더)
 # q_label 수 만큼 q_exemplar 존재
 q_exemplar={0:23, 1:39, 2:44, 3:14, 4:33}
