@@ -73,6 +73,11 @@ A-Q-S에 대해 동시에 의존도 결정하는 것은 쉽지 않아 보임
        - Sheet 5 : Label 연결 Depth <= 3 인경우(Depth가 0 or 1 or 2 or 3인 경우가 있으면 1, 없으면 0을 넣으면 됨)
        
 
+- 아래 예시와 같이 다양한 경로를 가짐
+- exemplar 자신에게 돌아오는 경로는 아래 그림 결과에 상관없이 0으로 저장
+
+![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/path.png)
+
    - 참고 그래프입니다(참고만;;)
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/connection_path.png)
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/id.png)
