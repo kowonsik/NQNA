@@ -39,6 +39,8 @@
     - S - A 는 Q - A 연결도를 만드는 것 보다 상대적으로 수월할 것으로 예상됨
 </pre>
 
+-----
+
 ##### 기능 구현 내용
    * __입력 데이터 목록__  (배열, 현재 구현은 Dictionary 객체로 구현됨)
      * (형식:DICT) 인용문 ID : 인용 문장의 아이디
@@ -57,21 +59,23 @@
 
 -------
 
+### 현재까지 구현된 내용
+
 - 인용문의 연결 그래프
    - 실행시 옵션을 주어 그래프의 상태 정보를 볼수 있도록 구현
-   - 인용문의 연결은 상호 의존성이 있음을 의미
-   - (의문) 인용문들이 서로 연결되어 있다면, 어떤 수치로 연결을 결정하는지?
-   - (의문) 입력 되는 많은 인용문 데이터 중에, 어떤 인용문을 (검색 기준) 인용문으로 정하는 지?
 
 ````sh
 - 옵션 예
-- python -show q_id  # id만 표시
-- python -show all   # 모두 표시
-- python -show exemplar   # exemplar만 표시
-- python -show label 1   # 1번 Label 만 표시
-# 모든 노드에 대한 Degree of Neighbor의 랭킹을 매기고 가장 많은 2개의 exemplar를 표시
-# Degree of Neighbor란 자신과 연결되어 있는 주변노드의 수를 의미 함
-- python -show maxngb 2   
+  - python -show q_id  # id만 표시
+  - python -show all   # 모두 표시
+  - python -show exemplar   # exemplar만 표시
+  - python -show label 1   # 1번 Label 만 표시
+
+  # 모든 노드에 대한 Degree of Neighbor의 랭킹을 매기고 
+  # Degree가 높은 2개의 exemplar를 표시
+  # Degree of Neighbor란 자신과 연결되어 있는 주변노드의 수를 의미 함
+  # -- Degree는 (Examplar ID) 는 하위 (인용문 ID) 들과 연결된 선의 갯수 +  (Examplar ID)가 다른 (Examplar ID)와 연결된 선의 갯수 임
+  - python -show maxngb 2   
 
 ````
    - 같은 Label은 exemplar 중심으로 연결됨
