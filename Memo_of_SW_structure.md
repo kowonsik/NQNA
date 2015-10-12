@@ -49,9 +49,11 @@ A-Q-S에 대해 동시에 의존도 결정하는 것은 쉽지 않아 보임
 - python -show q_id  # id만 표시
 - python -show all   # 모두 표시
 - python -show exemplar   # exemplar만 표시
-# 모든 노드에 대한 Degree of Neighbor의 랭킹을 매기고 가장 많은 2개의 exemplar를 표시
-- python -show maxngb 2   
 - python -show label 1   # 1번 Label 만 표시
+# 모든 노드에 대한 Degree of Neighbor의 랭킹을 매기고 가장 많은 2개의 exemplar를 표시
+# Degree of Neighbor란 자신과 연결되어 있는 주변노드의 수를 의미 함
+- python -show maxngb 2   
+
 ````
    - 같은 Label은 exemplar 중심으로 연결됨
    - 다른 Label에 연결될때는 exemplar 를 통해서 연결됨
