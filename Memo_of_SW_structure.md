@@ -38,7 +38,7 @@ A-Q-S에 대해 동시에 의존도 결정하는 것은 쉽지 않아 보임
 
 -------
 
- 1. 인용문의 연결 그래프
+- 인용문의 연결 그래프
    - 실행시 옵션을 주어 그래프의 상태 정보를 볼수 있도록 구현
    - 인용문의 연결은 상호 의존성이 있음을 의미
    - (의문) 인용문들이 서로 연결되어 있다면, 어떤 수치로 연결을 결정하는지?
@@ -53,16 +53,18 @@ A-Q-S에 대해 동시에 의존도 결정하는 것은 쉽지 않아 보임
 - python -show maxngb 2   
 - python -show label 1   # 1번 Label 만 표시
 ````
-- 같은 Label은 exemplar 중심으로 연결됨
-- 다른 Label에 연결될때는 exemplar 를 통해서 연결됨
-- node의 정보는 q_id와 인용문의 일부(10자정도)를 표시해주면 됨
+   - 같은 Label은 exemplar 중심으로 연결됨
+   - 다른 Label에 연결될때는 exemplar 를 통해서 연결됨
+   - node의 정보는 q_id와 인용문의 일부(10자정도)를 표시해주면 됨
 
-2. 인용문의 연결 정보를 엑셀에 저장
-- 같은 Label(클러스터)의 id(node)의 depth는 0
-- 연결된 클러스터의 Depth는 1이며 클러스터 간에는 다수의 Path가 있어 모든 경우의 수를 다 고려하여 처리
-- 아래 그림을 보면 
-- Label 1에서 Label 2로 가는 Depth가 직접가는 1 이있고
-- Label 1에서 Label 4를 거쳐 Label 2로 가는 Depth가 2인경우가 있음
+-------
+
+- 인용문의 연결 정보를 엑셀에 저장
+   - 같은 Label(클러스터)의 id(node)의 depth는 0
+   - 연결된 클러스터의 Depth는 1이며 클러스터 간에는 다수의 Path가 있어 모든 경우의 수를 다 고려하여 처리
+   - 아래 그림을 보면 
+   - Label 1에서 Label 2로 가는 Depth가 직접가는 1 이있고
+   - Label 1에서 Label 4를 거쳐 Label 2로 가는 Depth가 2인경우가 있음
 
 ![cluster](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/cluster.png)
 
@@ -73,8 +75,8 @@ A-Q-S에 대해 동시에 의존도 결정하는 것은 쉽지 않아 보임
        - Sheet 5 : Label 연결 Depth <= 3 인경우(Depth가 0 or 1 or 2 or 3인 경우가 있으면 1, 없으면 0을 넣으면 됨)
        
 
-- 아래 예시와 같이 다양한 경로를 가짐
-- exemplar 자신에게 돌아오는 경로는 아래 그림 결과에 상관없이 0으로 저장
+   - 아래 예시와 같이 다양한 경로를 가짐
+   - exemplar 자신에게 돌아오는 경로는 아래 그림 결과에 상관없이 0으로 저장
 
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/path.png)
 
