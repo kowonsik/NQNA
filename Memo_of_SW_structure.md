@@ -64,15 +64,15 @@
 
 ````sh
 - 옵션 예
-  - python -show q_id  # id만 표시
-  - python -show exemplar   # exemplar만 표시
-  - python -show label 1   # 1번 Label 만 표시
+  - python run.py -show q_id  # id만 표시
+  - python run.py -show exemplar   # exemplar만 표시
+  - python run.py -show label 1   # 1번 Label 만 표시
 
   # 모든 노드에 대한 Degree of Neighbor의 랭킹을 매기고 
   # Degree가 높은 2개의 exemplar를 표시
   # Degree of Neighbor란 자신과 연결되어 있는 주변노드의 수를 의미 함
   # -- Degree는 (Examplar ID) 는 하위 (인용문 ID) 들과 연결된 선의 갯수 +  (Examplar ID)가 다른 (Examplar ID)와 연결된 선의 갯수 임
-  - python -show maxngb 2   
+  - python run.py -show maxngb 2   
   
 -------
 
