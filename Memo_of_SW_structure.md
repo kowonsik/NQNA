@@ -108,7 +108,7 @@
 
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/path.png)
 
-   - 참고 그래프입니다(참고만;;)
+   - 결과 그래프입니다 (참고입니다.)
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/connection_path.png)
    
    - Sheet 1 : qid, q_label, q_exemplar
@@ -117,13 +117,13 @@
    - Sheet 2 : Label 연결 Matrix
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/matrix.png)
       
-   - Sheet 3 : Label 연결 Depth <= 1 인경우
+   - Sheet 3 : Label 연결 Depth ≤ 1 인경우 ( ↓ )
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/d1.png)
        
-  - Sheet 4 : Label 연결 Depth <= 2 인경우
+  - Sheet 4 : Label 연결 Depth ≤ 2 인경우 ( ↓ )
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/d2.png)
        
-   - Sheet 5 : Label 연결 Depth <= 3 인경우
+   - Sheet 5 : Label 연결 Depth ≤ 3 인경우 ( ↓ )
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/d3.png)
 
 #### 연결도(네트워크)를 그리기 위한 입력 파일
