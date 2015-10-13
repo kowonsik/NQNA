@@ -59,8 +59,14 @@
          *  Exempler ID 와 연결된 인용문 ID 는 직접 연결된다. 1-hop 연결됨. 2-hop 이상은 없음  
 
 
-   * 인용문의 연결 그래프
-     * 실행시 옵션을 주어 그래프의 상태 정보를 볼수 있도록 구현
+### 현재까지 구현된 내용
+
+- 인용문의 연결 그래프
+   - 실행시 옵션을 주어 그래프의 상태 정보를 볼수 있도록 구현
+   - 같은 Label(클러스터)는 exemplar_ID(클러스터 아이디) 중심으로 연결됨
+   - 다른 Label에 연결될때는 exemplar_ID 를 통해서 연결됨
+   - node 그림의 정보는 q_id(인용문 아이디) 값와 인용문의 처음 일부문자 (10자정도)를 표시해주면 됨
+
 
 ````sh
 - 옵션 예
@@ -73,40 +79,30 @@
   # Degree of Neighbor란 자신과 연결되어 있는 주변노드의 수를 의미 함
   # -- Degree는 (Examplar ID) 는 하위 (인용문 ID) 들과 연결된 선의 갯수 +  (Examplar ID)가 다른 (Examplar ID)와 연결된 선의 갯수 임
   - python run.py -show maxngb 2   
-  
--------
 
-### 현재까지 구현된 내용
-
-- 인용문의 연결 그래프
-   - 실행시 옵션을 주어 그래프의 상태 정보를 볼수 있도록 구현
-
-````sh
-- 옵션
   - python -show all   # 모두 표시
 
-````
-   - 같은 Label은 exemplar 중심으로 연결됨
-   - 다른 Label에 연결될때는 exemplar 를 통해서 연결됨
-   - node의 정보는 q_id와 인용문의 일부(10자정도)를 표시해주면 됨
+````sh
 
 -------
 
 - 인용문의 연결 정보를 엑셀에 저장
-   - 같은 Label(클러스터)의 id(node)의 depth는 0
+   - 같은 Label(클러스터)의 id(node, 인용문)의 depth는 0
    - 연결된 클러스터의 Depth는 1이며 클러스터 간에는 다수의 Path가 있어 모든 경우의 수를 다 고려하여 처리
    - 아래 그림을 보면 
-   - Label 1에서 Label 2로 가는 Depth가 직접가는 1 이있고
-   - Label 1에서 Label 4를 거쳐 Label 2로 가는 Depth가 2인경우가 있음
+   - Label 1에서 Label 2로 가는 Depth (=path) 가 직접가는 1 이있고
+   - Label 1에서 Label 4를 거쳐 Label 2로 가는 Depth (=path)가 2인경우가 있음
 
 ![cluster](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/cluster.png)
 
-       - Sheet 1 : qid, q_label, q_exemplar
-       - Sheet 2 : Label 연결 Matrix
-       - Sheet 3 : Label 연결 Depth <= 1 인경우(Depth가 0 or 1인 경우가 있으면 1, 없으면 0을 넣으면 됨)
-       - Sheet 4 : Label 연결 Depth <= 2 인경우(Depth가 0 or 1 or 2인 경우가 있으면 1, 없으면 0을 넣으면 됨)
-       - Sheet 5 : Label 연결 Depth <= 3 인경우(Depth가 0 or 1 or 2 or 3인 경우가 있으면 1, 없으면 0을 넣으면 됨)
-       
+   - Sheet 1 : qid, q_label, q_exemplar
+   - Sheet 2 : Label 연결 Matrix
+   - Sheet 3 : Label 연결 Depth <= 1 인경우
+     - (Depth가 0 or 1인 경우가 존재하면 1, 존재 하지 않으면 0을 넣으면 됨)
+   - Sheet 4 : Label 연결 Depth <= 2 인경우
+     - (Depth가 0, 1 or 2인 경우가 존재하면 1, 존재 하지 않으면 0을 넣으면 됨)
+   - Sheet 5 : Label 연결 Depth <= 3 인경우
+     - (Depth가 0, 1, 2 or 3인 경우가 있으면 1, 없으면 0을 넣으면 됨)  
 
    - 아래 예시와 같이 다양한 경로를 가짐
    - exemplar 자신에게 돌아오는 경로는 아래 그림 결과에 상관없이 0으로 저장
@@ -128,31 +124,29 @@
 
 #### 연결도(네트워크)를 그리기 위한 입력 파일
    - 입력데이터는 Dr. Jung's Bin File 입니다. (아직 이 리포에는 없습니다.)
+
 ````sh
+
+< 사용되는 리스트 >
+
 # 인용문 고유ID
 # 10개를 예로 했지만 실제로는 3300개정도
 q_id={0:23, 1:10, 2:39, 3:44, 4:14, 5:33, 6:21, 7:66, 8:88, 9:11}
 >>>> (질문) 왜 q_id는  key : value 로 저장을 하는가? 그냥 아이디만 사용하면 될것 같은데....
->>>> (답변) 네..
->>>> (답변) 처음 시작을 디션어리로 해버려서;;
+>>>> (답변) 배열, 리스트로 변경해서 사용해도 됩니다
 
-# 인용문 Label
-# 같은 Label은 같은 클러스터를 구성한다고 보면 됨
-# q_id의 수(3300)만큼 있고 각각의 Label을 표시
+# Label_ID는 인용문들이 모여있는 클러스터 ID 임 
+# q_id의 수(3300)만큼 있고 각각의 인용문에 대해 Label_ID가 할당됨
 q_label={0:0, 1:4, 2:1, 3:2, 4:3, 5:4, 6:1, 7:2, 8:2, 9:1}
->>>> (질문) Label 은 어떤 기준 으로 결정 되는가? q_id 와 q_label은 key 값으로 구분 하는지?
-
->>>> (질문) 즉 q_lable[1], q_id[1] 이면, 인용문 10번은 레이블(클러스터 Id)가 4 라는 의미인지?
->>>> (답변1) 배열과 동일한 매핑임. q_id[5] 은 q_label[5]와 연결되어 있는 의미임. 
->>>>>>>>(숫자를 찾아서 코딩하기엔 한단계 더 들어가야 하기때문에 복잡하니, 배열로 바꿔주면 좋겠음) 
->>>> (답변2) 그리고 q_label[5]가 4이므로 q_id[5]인 33과 같은 클러스터(label)를 형성합니다(10번 & 33번)
->>>> q_id 와 q_label value 의 관계는.. 예를 들어.. q_id의 첫번재 value 23이 q_lable의 첫번째 value 인 0번과 매핑됩니다..
->>>> q_id value 10번과 33번의 자리(인덱스, 키)에  q_label(동일인덱스, 키)에 해당하는 value 4로 같으므로 같은 label
+>>>> (설명)  q_label[5]가 4 (label) 이므로 q_id[5]인 33 (인용문 ID)는 
+>>>> 인용문 33번은 4번 클러스터에 속해 있는 것입니다
 
 # Label의 대표 ID(클러스터 헤더)
 # q_label 수 만큼 q_exemplar 존재
 q_exemplar={0:23, 1:39, 2:44, 3:14, 4:33}
 
+# G_q 는 Exemplar 간의 연결 상태 표시 행렬
+# 가로축, 세로축 exemplar 0 ~ 4
 # Label의 연결도를 메트릭스로 표현(1: 연결, 0: 비연결)
 # 5x5 배열 예지만 실제로는 q_label x q_label 배열임
 G_q = np.matrix([\
