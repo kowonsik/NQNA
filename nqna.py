@@ -11,8 +11,10 @@ from na_config import *
 import na_tools as nt
 import na_build
 
-
 import matplotlib
+
+# Hangul Font
+matplotlib.rc('font', family='NanumGothic')
 
 NewsQuoObjs=nt.loadObjectBinaryFast(NEWS_QUO_OBJ)
 
