@@ -120,7 +120,7 @@
    - Sheet 3 : Label 연결 Depth ≤ 1 인경우 ( ↓ )
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/d1.png)
        
-  - Sheet 4 : Label 연결 Depth ≤ 2 인경우 ( ↓ )
+   - Sheet 4 : Label 연결 Depth ≤ 2 인경우 ( ↓ )
 ![connection](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/d2.png)
        
    - Sheet 5 : Label 연결 Depth ≤ 3 인경우 ( ↓ )
