@@ -81,8 +81,7 @@
   - python run.py -show maxngb 2   
 
   - python -show all   # 모두 표시
-
-````sh
+````
 
 -------
 
