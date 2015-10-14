@@ -10,11 +10,30 @@
      - 정보원, 인용문, 기사의 메트릭스 함수
      - 인용문 간의 유사도 거리 함수
 
-   - 인용문의 연결망 다이어그램
-     - 연결망 다이어그램을 위한 입력데이터
-       - Dictionary Files
-     - 연결망 다이어그램을 위한 출력데이터
+   - 인용문의 연결망 그래프
+     - 연결망 그래프을 위한 입력데이터 설명
+       - Dictionary Files(q_id, q_label, q_exemplar)
+       - q_label 상관도 Metrix
+     - 연결망 그래프 그리는 방법 
+       - Python NetworkX library
+       - exemplar 인용문간 연결
+       - exemplar 인용문이 아닌 인용문의 연결
+       - 인용문간의 Depth 구하는 방법 
+     - 연결망 그래프를 위한 출력데이터
+       - 인용문의 연결망 그래프
+          - 전체 인용문의 연결 그래프
+          - 선택 q_label 에 대한 연결 그래프
        - Excel Sheet
+          - g_id, g_label, q_exemplar 정보 저장 Sheet
+          - q_label 상관도 정보 Sheet
+          - q_id 간의 연결 Depth 정보 Sheet
+             - depth가 1이하인 경우
+             - depth가 2이하인 경우
+             - depth가 3이하인 경우
 
 ###### 실행 방법
+
 ###### 실행 결과
+     - 인용문의 유사도 거리 그래프
+     - 인용문 연결망 그래프(그림파일)
+     - 정보 저장 엑셀 파일
