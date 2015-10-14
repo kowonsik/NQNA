@@ -13,7 +13,7 @@
    - 인용문의 연결망 그래프
      - 연결망 그래프을 위한 입력데이터 설명
        - Dictionary Files(q_id, q_label, q_exemplar)
-       - q_label 상관도 Metrix
+       - q_label 상관도 Matrix
      - 연결망 그래프 그리는 방법 
        - Python NetworkX library
        - exemplar 인용문간 연결
