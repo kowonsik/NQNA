@@ -22,6 +22,17 @@
 #### 소프트웨어 입력 파일 및 연관도 도출 데이터 형식
 ![association](https://raw.githubusercontent.com/kowonsik/NQNA/master/png/xls_files_with_arrow.png)
 
+
+#### 설치
+  - pip install konlpy
+  - pip install numpy
+  - pip install pylab
+  - pip install openpyxl
+  - pip install xlsxwriter
+  - pip install scikit-learn
+  - pip install networkx
+  - pip install image
+
 ------
 
 #### 10/13 까지 구현 해야하는 기능 항목
